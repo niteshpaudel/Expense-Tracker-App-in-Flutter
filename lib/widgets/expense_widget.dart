@@ -22,7 +22,7 @@ class _ExpenseWidgetState extends State<ExpenseWidget> {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.min,
           children: [
             const Row(
               children: [

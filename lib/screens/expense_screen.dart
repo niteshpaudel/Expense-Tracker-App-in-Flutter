@@ -10,6 +10,9 @@ class ExpenseScreen extends StatefulWidget {
 }
 
 class _ExpenseScreenState extends State<ExpenseScreen> {
+  final expenseTitleController = TextEditingController();
+  final expenseDescriptionController = TextEditingController();
+  final expenseAmountController = TextEditingController();
   List<Widget> expenseList = [
     const Expense(
       expenseTitle: 'Grocery',
@@ -25,15 +28,21 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   String greetingText = "Morning";
   int currenthour = DateTime.now().hour;
   @override
+  void dispose() {
+    expenseTitleController.dispose();
+    expenseDescriptionController.dispose();
+    expenseAmountController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final expenseTitleController = TextEditingController();
-    final expenseDescriptionController = TextEditingController();
-    final expenseAmountController = TextEditingController();
     if (currenthour >= 12 && currenthour <= 18) {
       greetingText = "Afternoon";
     } else if (currenthour > 18) {
       greetingText = "Evening";
     }
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -225,31 +234,94 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
           ),
           onPressed: () {
             showModalBottomSheet(
+                isScrollControlled: true,
                 context: context,
                 builder: (context) {
-                  return Container(
-                    child: Column(
-                      children: [
-                        TextField(
-                          controller: expenseTitleController,
-                        ),
-                        TextField(
-                          controller: expenseDescriptionController,
-                        ),
-                        TextField(
-                          controller: expenseAmountController,
-                        ),
-                      ],
+                  return SizedBox(
+                    height: 700,
+                    child: Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Text(
+                            'Add New Expense',
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextField(
+                            controller: expenseTitleController,
+                            decoration: const InputDecoration(
+                                hintText: 'Enter Expense'),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            controller: expenseDescriptionController,
+                            decoration: const InputDecoration(
+                                hintText: 'Enter Description',
+                                hoverColor: Color.fromARGB(255, 255, 151, 86)),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            keyboardType: TextInputType.number,
+                            controller: expenseAmountController,
+                            decoration:
+                                const InputDecoration(hintText: 'Enter Amount'),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  expenseList.add(Expense(
+                                    expenseTitle: expenseTitleController.text,
+                                    expenseDescription:
+                                        expenseDescriptionController.text,
+                                    expenseAmount:
+                                        int.parse(expenseAmountController.text),
+                                  ));
+                                });
+                                Navigator.pop(context);
+                  
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 255, 151, 86),
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  )),
+                              child: const Text(
+                                'Save',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 });
-            setState(() {
-              expenseList.add(Expense(
-                expenseTitle: expenseTitleController.text,
-                expenseDescription: expenseDescriptionController.text,
-                expenseAmount: expenseAmountController as int,
-              ));
-            });
+            // setState(() {
+            //   expenseList.add(Expense(
+            //     expenseTitle: expenseTitleController.text,
+            //     expenseDescription: expenseDescriptionController.text,
+            //     expenseAmount: expenseAmountController as int,
+            //   ));
+            // });
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
