@@ -1,10 +1,39 @@
+import 'package:expense_tracker/widgets/expense.dart';
+import 'package:expense_tracker/widgets/expense_widget.dart';
 import 'package:flutter/material.dart';
 
-class ExpenseScreen extends StatelessWidget {
+class ExpenseScreen extends StatefulWidget {
   const ExpenseScreen({super.key});
 
   @override
+  State<ExpenseScreen> createState() => _ExpenseScreenState();
+}
+
+class _ExpenseScreenState extends State<ExpenseScreen> {
+  List<Widget> expenseList = [
+    const Expense(
+      expenseTitle: 'Grocery',
+      expenseDescription: 'Bought carrots and peas',
+      expenseAmount: 179,
+    ),
+    const Expense(
+      expenseTitle: 'Grocery',
+      expenseDescription: 'Bought carrots and peas',
+      expenseAmount: 179,
+    ),
+  ];
+  String greetingText = "Morning";
+  int currenthour = DateTime.now().hour;
+  @override
   Widget build(BuildContext context) {
+    final expenseTitleController = TextEditingController();
+    final expenseDescriptionController = TextEditingController();
+    final expenseAmountController = TextEditingController();
+    if (currenthour >= 12 && currenthour <= 18) {
+      greetingText = "Afternoon";
+    } else if (currenthour > 18) {
+      greetingText = "Evening";
+    }
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -29,14 +58,15 @@ class ExpenseScreen extends StatelessWidget {
                     const SizedBox(
                       width: 15,
                     ),
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Morning',
-                          style: TextStyle(fontSize: 15, color: Colors.black54),
+                          greetingText,
+                          style: const TextStyle(
+                              fontSize: 15, color: Colors.black54),
                         ),
-                        Text(
+                        const Text(
                           'Nitesh Paudel',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w600),
@@ -137,11 +167,11 @@ class ExpenseScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: -30,
-                      right: -75.0,
+                      top: -20,
+                      right: -55.0,
                       child: SizedBox(
-                        width: 250.0,
-                        height: 250.0,
+                        width: 225.0,
+                        height: 225.0,
                         child: Image.asset(
                           'assets/images/savings-and-investment.png',
                         ),
@@ -159,380 +189,9 @@ class ExpenseScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1.5,
-                      color: const Color.fromARGB(255, 210, 216, 253),
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        const Row(
-                          children: [
-                            Text(
-                              'Tuesday, 12',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            Spacer(),
-                            Text(
-                              '-₹16943',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                        const Divider(
-                          color: Color.fromARGB(255, 210, 216, 253),
-                          thickness: 1.5,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.blueAccent.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Icon(
-                                Icons.shopping_cart_outlined,
-                                color: Colors.deepPurple.withOpacity(0.8),
-                                size: 25,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Shop',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  'Buy new clothes',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            const Text(
-                              '-₹1549',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 17,
-                                  color: Colors.redAccent),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.orange.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Icon(
-                                Icons.phone_android,
-                                color: Colors.brown.withOpacity(0.8),
-                                size: 25,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Electronic',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  'Buy new S24 ultra',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            const Text(
-                              '-₹15999',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 17,
-                                  color: Colors.redAccent),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.greenAccent.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Icon(
-                                Icons.filter_drama_sharp,
-                                color: Colors.green.withOpacity(0.8),
-                                size: 25,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Groceries',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  'Buy groceries',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            const Text(
-                              '-₹349',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 17,
-                                  color: Colors.redAccent),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                ExpenseWidget(expenseList: expenseList),
                 const SizedBox(
                   height: 20,
-                ),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1.5,
-                      color: const Color.fromARGB(255, 210, 216, 253),
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      children: [
-                        const Row(
-                          children: [
-                            Text(
-                              'Tuesday, 12',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            Spacer(),
-                            Text(
-                              '-₹16943',
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                        const Divider(
-                          color: Color.fromARGB(255, 210, 216, 253),
-                          thickness: 1.5,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.blueAccent.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Icon(
-                                Icons.shopping_cart_outlined,
-                                color: Colors.deepPurple.withOpacity(0.8),
-                                size: 25,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Shop',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  'Buy new clothes',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            const Text(
-                              '-₹1549',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 17,
-                                  color: Colors.redAccent),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.orange.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Icon(
-                                Icons.phone_android,
-                                color: Colors.brown.withOpacity(0.8),
-                                size: 25,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Electronic',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  'Buy new S24 ultra',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            const Text(
-                              '-₹15999',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 17,
-                                  color: Colors.redAccent),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.greenAccent.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Icon(
-                                Icons.filter_drama_sharp,
-                                color: Colors.green.withOpacity(0.8),
-                                size: 25,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Groceries',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  'Buy groceries',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            const Text(
-                              '-₹349',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 17,
-                                  color: Colors.redAccent),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ],
             ),
@@ -564,7 +223,34 @@ class ExpenseScreen extends StatelessWidget {
             Icons.add,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: expenseTitleController,
+                        ),
+                        TextField(
+                          controller: expenseDescriptionController,
+                        ),
+                        TextField(
+                          controller: expenseAmountController,
+                        ),
+                      ],
+                    ),
+                  );
+                });
+            setState(() {
+              expenseList.add(Expense(
+                expenseTitle: expenseTitleController.text,
+                expenseDescription: expenseDescriptionController.text,
+                expenseAmount: expenseAmountController as int,
+              ));
+            });
+          },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
