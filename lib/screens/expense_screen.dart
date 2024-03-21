@@ -237,136 +237,134 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
           ),
           onPressed: () {
             showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                builder: (context) {
-                  return SizedBox(
-                    height: 750,
-                    child: Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Add New Expense',
-                            style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.w600),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextField(
-                            controller: expenseTitleController,
-                            focusNode: titleFocusNode,
-                            maxLength: 15,
-                            decoration: InputDecoration(
-                              focusedBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 255, 151, 86)),
-                              ),
-                              focusColor: Colors.greenAccent,
-                              labelText: 'Enter Expense',
-                              labelStyle: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal,
-                                  color: titleFocusNode.hasFocus
-                                      ? Colors.black54
-                                      : Colors.black87),
+              isScrollControlled: true,
+              context: context,
+              builder: (context) {
+                return SizedBox(
+                  height: 750,
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Add New Expense',
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextField(
+                          controller: expenseTitleController,
+                          
+                          focusNode: titleFocusNode,
+                          maxLength: 15,
+                          decoration: const InputDecoration(
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 255, 151, 86)),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextField(
-                            controller: expenseDescriptionController,
-                            focusNode: descriptionFocusNode,
-                            maxLength: 25,
-                            decoration: InputDecoration(
-                              focusedBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 255, 151, 86)),
-                              ),
-                              labelText: 'Enter Description',
-                              labelStyle: TextStyle(
+                            floatingLabelStyle: TextStyle(
+                              color: Colors.green
+                            ),
+                            focusColor: Colors.greenAccent,
+                            labelText: 'Enter Expense',
+                            labelStyle: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
-                                color: descriptionFocusNode.hasFocus
-                                    ? Colors.black54
-                                    : Colors.black87,
-                              ),
+                                color: Colors.blueAccent,
+                                
+                                ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        TextField(
+                          controller: expenseDescriptionController,
+                          focusNode: descriptionFocusNode,
+                          maxLength: 25,
+                          decoration: InputDecoration(
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 255, 151, 86)),
+                            ),
+                            labelText: 'Enter Description',
+                            labelStyle: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              color: descriptionFocusNode.hasFocus
+                                  ? Colors.black54
+                                  : Colors.black87,
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextField(
-                            keyboardType: TextInputType.number,
-                            focusNode: amountFocusNode,
-                            controller: expenseAmountController,
-                            decoration: InputDecoration(
-                              focusedBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 255, 151, 86)),
-                              ),
-                              labelText: 'Enter Amount',
-                              labelStyle: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                                color: amountFocusNode.hasFocus
-                                    ? Colors.black54
-                                    : Colors.black87,
-                              ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        TextField(
+                          keyboardType: TextInputType.number,
+                          focusNode: amountFocusNode,
+                          controller: expenseAmountController,
+                          decoration: InputDecoration(
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(255, 255, 151, 86)),
+                            ),
+                            labelText: 'Enter Amount',
+                            labelStyle: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              color: amountFocusNode.hasFocus
+                                  ? Colors.black54
+                                  : Colors.black87,
                             ),
                           ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 50,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  expenseList.add(Expense(
-                                    expenseTitle: expenseTitleController.text,
-                                    expenseDescription:
-                                        expenseDescriptionController.text,
-                                    expenseAmount:
-                                        int.parse(expenseAmountController.text),
-                                  ));
-                                  expenseTitleController.clear();
-                                  expenseAmountController.clear();
-                                  expenseDescriptionController.clear();
-                                });
-                                Navigator.pop(context);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 255, 151, 86),
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  )),
-                              child: const Text(
-                                'Save',
-                                style: TextStyle(fontSize: 16),
-                              ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                expenseList.add(Expense(
+                                  expenseTitle: expenseTitleController.text,
+                                  expenseDescription:
+                                      expenseDescriptionController.text,
+                                  expenseAmount:
+                                      int.parse(expenseAmountController.text),
+                                ));
+                                expenseTitleController.clear();
+                                expenseAmountController.clear();
+                                expenseDescriptionController.clear();
+                              });
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 255, 151, 86),
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                            child: const Text(
+                              'Save',
+                              style: TextStyle(fontSize: 16),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  );
-                });
-            // setState(() {
-            //   expenseList.add(Expense(
-            //     expenseTitle: expenseTitleController.text,
-            //     expenseDescription: expenseDescriptionController.text,
-            //     expenseAmount: expenseAmountController as int,
-            //   ));
-            // });
+                  ),
+                );
+              },
+            );
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
