@@ -1,6 +1,7 @@
 import 'package:expense_tracker/widgets/expense.dart';
 import 'package:expense_tracker/widgets/expense_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ExpenseScreen extends StatefulWidget {
   const ExpenseScreen({super.key});
@@ -16,18 +17,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   FocusNode titleFocusNode = FocusNode();
   FocusNode descriptionFocusNode = FocusNode();
   FocusNode amountFocusNode = FocusNode();
-  List<Widget> expenseList = [
-    const Expense(
-      expenseTitle: 'Grocery',
-      expenseDescription: 'Bought carrots and peas',
-      expenseAmount: 179,
-    ),
-    const Expense(
-      expenseTitle: 'Grocery',
-      expenseDescription: 'Bought carrots and peas',
-      expenseAmount: 179,
-    ),
-  ];
+  List<Widget> expenseList = [];
   String greetingText = "Morning";
   int currenthour = DateTime.now().hour;
   @override
@@ -199,9 +189,19 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
-                ExpenseWidget(expenseList: expenseList),
+                expenseList.isEmpty
+                    ? const Center(
+                        child: Text(
+                          'Start Tracking Your Expenses \n By Clicking The (+) Icon',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      )
+                    : ExpenseWidget(expenseList: expenseList),
                 const SizedBox(
                   height: 20,
                 ),
@@ -209,19 +209,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                width: 1.5,
-                color: Color.fromARGB(255, 210, 216, 253),
-              ),
-            ),
-          ),
-          child: const BottomAppBar(
-            height: 50,
-            surfaceTintColor: Colors.transparent,
-          ),
+        bottomNavigationBar: const BottomAppBar(
+          height: 50,
+          surfaceTintColor: Colors.transparent,
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color.fromARGB(255, 255, 151, 86),
@@ -259,25 +249,23 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                         ),
                         TextField(
                           controller: expenseTitleController,
-                          
                           focusNode: titleFocusNode,
                           maxLength: 15,
-                          decoration: const InputDecoration(
-                            focusedBorder: UnderlineInputBorder(
+                          decoration: InputDecoration(
+                            focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                   color: Color.fromARGB(255, 255, 151, 86)),
                             ),
-                            floatingLabelStyle: TextStyle(
-                              color: Colors.green
-                            ),
-                            focusColor: Colors.greenAccent,
+                            // floatingLabelStyle: TextStyle(color: Colors.green),
+                            // focusColor: Colors.greenAccent,
                             labelText: 'Enter Expense',
                             labelStyle: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.blueAccent,
-                                
-                                ),
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              color: titleFocusNode.hasFocus
+                                  ? Colors.black54
+                                  : Colors.black87,
+                            ),
                           ),
                         ),
                         const SizedBox(
