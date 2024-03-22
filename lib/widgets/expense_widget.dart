@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ExpenseWidget extends StatefulWidget {
-  const ExpenseWidget({required this.expenseList, super.key});
+  const ExpenseWidget(
+      {required this.expenseList, required this.totalAmount, super.key});
   final List<Widget> expenseList;
+  final int totalAmount;
   @override
   State<ExpenseWidget> createState() => _ExpenseWidgetState();
 }
@@ -24,16 +26,16 @@ class _ExpenseWidgetState extends State<ExpenseWidget> {
         child: Column(
           // mainAxisSize: MainAxisSize.min,
           children: [
-            const Row(
+            Row(
               children: [
-                Text(
+                const Text(
                   'Tuesday, 12',
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
-                  '-₹16943',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                  '₹${widget.totalAmount}',
+                  style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                 ),
               ],
             ),
@@ -44,13 +46,12 @@ class _ExpenseWidgetState extends State<ExpenseWidget> {
             const SizedBox(
               height: 10,
             ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: widget.expenseList.length,
-                itemBuilder: (context, index) => widget.expenseList[index],
-              ),
-    
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: widget.expenseList.length,
+              itemBuilder: (context, index) => widget.expenseList[index],
+            ),
           ],
         ),
       ),

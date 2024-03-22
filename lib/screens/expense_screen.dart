@@ -1,7 +1,9 @@
 import 'package:expense_tracker/widgets/expense.dart';
 import 'package:expense_tracker/widgets/expense_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+// print('Total Amount: $totalAmount');
+// int totalAmount = expenseList.map((expense) => expense.amount).reduce((value, element) => value + element);
 
 class ExpenseScreen extends StatefulWidget {
   const ExpenseScreen({super.key});
@@ -17,7 +19,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   FocusNode titleFocusNode = FocusNode();
   FocusNode descriptionFocusNode = FocusNode();
   FocusNode amountFocusNode = FocusNode();
-  List<Widget> expenseList = [];
+  List<Expense> expenseList = [];
   String greetingText = "Morning";
   int currenthour = DateTime.now().hour;
   @override
@@ -34,6 +36,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
       greetingText = "Afternoon";
     } else if (currenthour > 18) {
       greetingText = "Evening";
+    }
+    int totalAmount = 0;
+    for (Expense expense in expenseList) {
+      totalAmount += expense.expenseAmount;
     }
 
     return SafeArea(
@@ -124,9 +130,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            const Text(
-                              '₹5000',
-                              style: TextStyle(
+                            Text(
+                              '₹$totalAmount',
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 35,
                                   fontWeight: FontWeight.w600),
@@ -201,7 +207,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           ),
                         ),
                       )
-                    : ExpenseWidget(expenseList: expenseList),
+                    : ExpenseWidget(expenseList: expenseList, totalAmount: totalAmount,),
                 const SizedBox(
                   height: 20,
                 ),
