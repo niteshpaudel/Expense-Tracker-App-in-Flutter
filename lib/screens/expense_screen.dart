@@ -1,6 +1,7 @@
 import 'package:expense_tracker/widgets/expense.dart';
 import 'package:expense_tracker/widgets/expense_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 // print('Total Amount: $totalAmount');
 // int totalAmount = expenseList.map((expense) => expense.amount).reduce((value, element) => value + element);
@@ -16,18 +17,34 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   final expenseTitleController = TextEditingController();
   final expenseDescriptionController = TextEditingController();
   final expenseAmountController = TextEditingController();
+  final formatter = DateFormat.yMd();
   FocusNode titleFocusNode = FocusNode();
   FocusNode descriptionFocusNode = FocusNode();
   FocusNode amountFocusNode = FocusNode();
   List<Expense> expenseList = [];
   String greetingText = "Morning";
   int currenthour = DateTime.now().hour;
+  DateTime? selectedDate;
   @override
   void dispose() {
     expenseTitleController.dispose();
     expenseDescriptionController.dispose();
     expenseAmountController.dispose();
     super.dispose();
+  }
+
+  void datePicker() async {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: now,
+    );
+    setState(() {
+      selectedDate = pickedDate;
+    });
   }
 
   @override
@@ -207,7 +224,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           ),
                         ),
                       )
-                    : ExpenseWidget(expenseList: expenseList, totalAmount: totalAmount,),
+                    : ExpenseWidget(
+                        expenseList: expenseList,
+                        totalAmount: totalAmount,
+                      ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -299,24 +319,55 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        TextField(
-                          keyboardType: TextInputType.number,
-                          focusNode: amountFocusNode,
-                          controller: expenseAmountController,
-                          decoration: InputDecoration(
-                            focusedBorder: const UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 255, 151, 86)),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 150,
+                              child: TextField(
+                                keyboardType: TextInputType.number,
+                                focusNode: amountFocusNode,
+                                controller: expenseAmountController,
+                                decoration: InputDecoration(
+                                  focusedBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 255, 151, 86)),
+                                  ),
+                                  labelText: 'Enter Amount',
+                                  labelStyle: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                    color: amountFocusNode.hasFocus
+                                        ? Colors.black54
+                                        : Colors.black87,
+                                  ),
+                                ),
+                              ),
                             ),
-                            labelText: 'Enter Amount',
-                            labelStyle: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal,
-                              color: amountFocusNode.hasFocus
-                                  ? Colors.black54
-                                  : Colors.black87,
+                            const Spacer(),
+                            GestureDetector(
+                              onTap: () {
+                                datePicker();
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    selectedDate == null
+                                        ? 'Select Date'
+                                        : formatter.format(selectedDate!),
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.black87),
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  const Icon(Icons.calendar_month),
+                                ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                         const SizedBox(
                           height: 30,
