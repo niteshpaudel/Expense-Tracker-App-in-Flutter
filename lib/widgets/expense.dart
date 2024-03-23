@@ -51,7 +51,7 @@ class Expense extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            '-$expenseAmount',
+            '-₹$expenseAmount',
             style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17,
