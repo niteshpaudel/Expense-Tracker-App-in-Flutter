@@ -33,6 +33,20 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     super.dispose();
   }
 
+  void submitExpense() {
+    setState(() {
+      expenseList.add(Expense(
+        expenseTitle: expenseTitleController.text,
+        expenseDescription: expenseDescriptionController.text,
+        expenseAmount: int.parse(expenseAmountController.text),
+      ));
+      expenseTitleController.clear();
+      expenseAmountController.clear();
+      expenseDescriptionController.clear();
+    });
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (currenthour >= 12 && currenthour <= 18) {
@@ -379,19 +393,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                             height: 50,
                             child: ElevatedButton(
                               onPressed: () {
-                                setState(() {
-                                  expenseList.add(Expense(
-                                    expenseTitle: expenseTitleController.text,
-                                    expenseDescription:
-                                        expenseDescriptionController.text,
-                                    expenseAmount:
-                                        int.parse(expenseAmountController.text),
-                                  ));
-                                  expenseTitleController.clear();
-                                  expenseAmountController.clear();
-                                  expenseDescriptionController.clear();
-                                });
-                                Navigator.pop(context);
+                                submitExpense();
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor:
