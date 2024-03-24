@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ExpenseWidget extends StatefulWidget {
-  const ExpenseWidget(
-      {required this.expenseList, required this.totalAmount, super.key});
+  const ExpenseWidget({
+    required this.expenseList,
+    required this.totalAmount,
+    required this.selectedDate,
+    super.key,
+  });
   final List<Widget> expenseList;
   final int totalAmount;
+  final DateTime selectedDate;
+
+  // String? currentDay;
   @override
   State<ExpenseWidget> createState() => _ExpenseWidgetState();
 }
@@ -12,6 +20,31 @@ class ExpenseWidget extends StatefulWidget {
 class _ExpenseWidgetState extends State<ExpenseWidget> {
   @override
   Widget build(BuildContext context) {
+  final DateFormat formatter = DateFormat.EEEE();
+  final String currentDay = formatter.format(widget.selectedDate);
+    // switch (widget.selectedDate.weekday) {
+    //   case 1:
+    //     widget.currentDay = "Saturday";
+    //     break;
+    //   case 2:
+    //     widget.currentDay = "Monday";
+    //     break;
+    //   case 3:
+    //     widget.currentDay = "Tuesday";
+    //     break;
+    //   case 4:
+    //     widget.currentDay = "Wednesday";
+    //     break;
+    //   case 5:
+    //     widget.currentDay = "Thursday";
+    //     break;
+    //   case 6:
+    //     widget.currentDay = "Friday";
+    //     break;
+    //   case 7:
+    //     widget.currentDay = "Sunday";
+    //     break;
+    // }
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -28,14 +61,16 @@ class _ExpenseWidgetState extends State<ExpenseWidget> {
           children: [
             Row(
               children: [
-                const Text(
-                  'Tuesday, 12',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                Text(
+                  currentDay,
+                  style: const TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.w500),
                 ),
                 const Spacer(),
                 Text(
                   '₹${widget.totalAmount}',
-                  style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                  style: const TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.w500),
                 ),
               ],
             ),

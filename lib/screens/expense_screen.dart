@@ -25,6 +25,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   String greetingText = "Morning";
   int currenthour = DateTime.now().hour;
   DateTime? selectedDate;
+  DateTime? tempSelectedDate;
   @override
   void dispose() {
     expenseTitleController.dispose();
@@ -43,6 +44,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
       expenseTitleController.clear();
       expenseAmountController.clear();
       expenseDescriptionController.clear();
+      tempSelectedDate = selectedDate;
+      selectedDate = null;
     });
     Navigator.pop(context);
   }
@@ -227,6 +230,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     : ExpenseWidget(
                         expenseList: expenseList,
                         totalAmount: totalAmount,
+                        selectedDate: tempSelectedDate!,
                       ),
                 const SizedBox(
                   height: 20,
