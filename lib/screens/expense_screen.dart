@@ -215,7 +215,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 expenseList.isEmpty
                     ? const Center(
