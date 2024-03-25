@@ -20,8 +20,8 @@ class ExpenseWidget extends StatefulWidget {
 class _ExpenseWidgetState extends State<ExpenseWidget> {
   @override
   Widget build(BuildContext context) {
-  final DateFormat formatter = DateFormat.EEEE();
-  final String currentDay = formatter.format(widget.selectedDate);
+    final DateFormat formatter = DateFormat.EEEE();
+    final String currentDay = formatter.format(widget.selectedDate);
     // switch (widget.selectedDate.weekday) {
     //   case 1:
     //     widget.currentDay = "Saturday";
@@ -62,7 +62,7 @@ class _ExpenseWidgetState extends State<ExpenseWidget> {
             Row(
               children: [
                 Text(
-                  currentDay,
+                  "$currentDay, ${widget.selectedDate.day}",
                   style: const TextStyle(
                       fontSize: 17, fontWeight: FontWeight.w500),
                 ),

@@ -295,23 +295,25 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           ),
                           TextField(
                             controller: expenseTitleController,
-                            focusNode: titleFocusNode,
+                            // focusNode: titleFocusNode,
                             maxLength: 15,
-                            decoration: InputDecoration(
-                              focusedBorder: const UnderlineInputBorder(
+                            decoration: const InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 255, 151, 86)),
                               ),
-                              // floatingLabelStyle: TextStyle(color: Colors.green),
+                              floatingLabelStyle:
+                                  TextStyle(color: Colors.black45),
                               // focusColor: Colors.greenAccent,
                               labelText: 'Enter Expense',
                               labelStyle: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                                color: titleFocusNode.hasFocus
-                                    ? Colors.black54
-                                    : Colors.black87,
-                              ),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black87
+                                  // color: titleFocusNode.hasFocus
+                                  //     ? Colors.black54
+                                  //     : Colors.black87,
+                                  ),
                             ),
                           ),
                           const SizedBox(
@@ -319,21 +321,25 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                           ),
                           TextField(
                             controller: expenseDescriptionController,
-                            focusNode: descriptionFocusNode,
+                            // focusNode: descriptionFocusNode,
                             maxLength: 25,
-                            decoration: InputDecoration(
-                              focusedBorder: const UnderlineInputBorder(
+                            decoration: const InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 255, 151, 86)),
                               ),
+                              floatingLabelStyle:
+                                  TextStyle(color: Colors.black45),
                               labelText: 'Enter Description',
                               labelStyle: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                                color: descriptionFocusNode.hasFocus
-                                    ? Colors.black54
-                                    : Colors.black87,
-                              ),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black87
+                                  // color:
+                                  // descriptionFocusNode.hasFocus
+                                  //     ? Colors.black54
+                                  //     : Colors.black87,
+                                  ),
                             ),
                           ),
                           const SizedBox(
@@ -347,19 +353,23 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                   keyboardType: TextInputType.number,
                                   focusNode: amountFocusNode,
                                   controller: expenseAmountController,
-                                  decoration: InputDecoration(
-                                    focusedBorder: const UnderlineInputBorder(
+                                  decoration: const InputDecoration(
+                                    focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 255, 151, 86)),
+                                        color:
+                                            Color.fromARGB(255, 255, 151, 86),
+                                      ),
                                     ),
+                                    floatingLabelStyle:
+                                        TextStyle(color: Colors.black45),
                                     labelText: 'Enter Amount',
                                     labelStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.normal,
-                                      color: amountFocusNode.hasFocus
-                                          ? Colors.black54
-                                          : Colors.black87,
+                                      color: Colors.black87,
+                                      // color: amountFocusNode.hasFocus
+                                      //     ? Colors.black54
+                                      //     : Colors.black87,
                                     ),
                                   ),
                                 ),
