@@ -38,21 +38,26 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     String receivedText = expenseTitleController.text;
     String receivedDecription = expenseDescriptionController.text;
     double? receivedAmount = double.tryParse(expenseAmountController.text);
-    // bool isReceivedAmountValid = receivedAmount <=0 || receivedAmount==null;
-    // if(receivedText.trim().isEmpty || ){}
-    setState(() {
-      expenseList.add(Expense(
-        expenseTitle: receivedText,
-        expenseDescription: receivedDecription,
-        expenseAmount: receivedAmount,
-      ));
-      expenseTitleController.clear();
-      expenseAmountController.clear();
-      expenseDescriptionController.clear();
-      tempSelectedDate = selectedDate;
-      selectedDate = null;
-    });
-    Navigator.pop(context);
+    bool isReceivedAmountInvalid = (receivedAmount ?? 0.0) <= 0 || receivedAmount == null;
+    if (receivedText.trim().isEmpty ||
+        receivedDecription.trim().isEmpty ||
+        isReceivedAmountInvalid ||
+        selectedDate == null) {
+    } else {
+      setState(() {
+        expenseList.add(Expense(
+          expenseTitle: receivedText,
+          expenseDescription: receivedDecription,
+          expenseAmount: receivedAmount,
+        ));
+        expenseTitleController.clear();
+        expenseAmountController.clear();
+        expenseDescriptionController.clear();
+        tempSelectedDate = selectedDate;
+        selectedDate = null;
+      });
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -62,7 +67,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     } else if (currenthour > 18) {
       greetingText = "Evening";
     }
-    double totalAmount=0;
+    double totalAmount = 0;
     for (Expense expense in expenseList) {
       totalAmount += expense.expenseAmount as double;
     }
