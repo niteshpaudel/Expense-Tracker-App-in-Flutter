@@ -11,7 +11,7 @@ class Expense extends StatelessWidget {
   });
   final String expenseTitle;
   final String expenseDescription;
-  final int expenseAmount;
+  final double? expenseAmount;
   @override
   Widget build(BuildContext context) {
     final Random random = Random();

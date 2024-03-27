@@ -35,11 +35,16 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   }
 
   void submitExpense() {
+    String receivedText = expenseTitleController.text;
+    String receivedDecription = expenseDescriptionController.text;
+    double? receivedAmount = double.tryParse(expenseAmountController.text);
+    // bool isReceivedAmountValid = receivedAmount <=0 || receivedAmount==null;
+    // if(receivedText.trim().isEmpty || ){}
     setState(() {
       expenseList.add(Expense(
-        expenseTitle: expenseTitleController.text,
-        expenseDescription: expenseDescriptionController.text,
-        expenseAmount: int.parse(expenseAmountController.text),
+        expenseTitle: receivedText,
+        expenseDescription: receivedDecription,
+        expenseAmount: receivedAmount,
       ));
       expenseTitleController.clear();
       expenseAmountController.clear();
@@ -57,9 +62,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     } else if (currenthour > 18) {
       greetingText = "Evening";
     }
-    int totalAmount = 0;
+    double totalAmount=0;
     for (Expense expense in expenseList) {
-      totalAmount += expense.expenseAmount;
+      totalAmount += expense.expenseAmount as double;
     }
 
     return SafeArea(

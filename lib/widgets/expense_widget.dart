@@ -9,7 +9,7 @@ class ExpenseWidget extends StatefulWidget {
     super.key,
   });
   final List<Widget> expenseList;
-  final int totalAmount;
+  final double totalAmount;
   final DateTime selectedDate;
 
   // String? currentDay;
