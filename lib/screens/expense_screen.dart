@@ -18,9 +18,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   final expenseDescriptionController = TextEditingController();
   final expenseAmountController = TextEditingController();
   final formatter = DateFormat.yMd();
-  FocusNode titleFocusNode = FocusNode();
-  FocusNode descriptionFocusNode = FocusNode();
-  FocusNode amountFocusNode = FocusNode();
+  // FocusNode titleFocusNode = FocusNode();
+  // FocusNode descriptionFocusNode = FocusNode();
+  // FocusNode amountFocusNode = FocusNode();
   List<Expense> expenseList = [];
   String greetingText = "Morning";
   int currenthour = DateTime.now().hour;
@@ -361,7 +361,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                                 width: 150,
                                 child: TextField(
                                   keyboardType: TextInputType.number,
-                                  focusNode: amountFocusNode,
+                                  // focusNode: amountFocusNode,
                                   controller: expenseAmountController,
                                   decoration: const InputDecoration(
                                     focusedBorder: UnderlineInputBorder(
