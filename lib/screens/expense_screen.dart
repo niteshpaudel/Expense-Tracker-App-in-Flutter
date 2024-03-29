@@ -38,7 +38,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     String receivedText = expenseTitleController.text;
     String receivedDecription = expenseDescriptionController.text;
     double? receivedAmount = double.tryParse(expenseAmountController.text);
-    bool isReceivedAmountInvalid = (receivedAmount ?? 0.0) <= 0 || receivedAmount == null;
+    bool isReceivedAmountInvalid =
+        (receivedAmount ?? 0.0) <= 0 || receivedAmount == null;
     if (receivedText.trim().isEmpty ||
         receivedDecription.trim().isEmpty ||
         isReceivedAmountInvalid ||
@@ -271,7 +272,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               context: context,
               builder: (context) {
                 return StatefulBuilder(builder: (context, setState) {
-                  void datePicker() async {
+                  void datePicker(BuildContext context) async {
                     final now = DateTime.now();
                     final firstDate =
                         DateTime(now.year - 1, now.month, now.day);
@@ -280,6 +281,16 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                       initialDate: now,
                       firstDate: firstDate,
                       lastDate: now,
+                      builder: (context, child) {
+                        return Theme(
+                          data: Theme.of(context).copyWith(
+                            colorScheme: const ColorScheme.light(
+                              primary: Color.fromARGB(255, 255, 151, 86),
+                            ),
+                          ),
+                          child: child!,
+                        );
+                      },
                     );
                     setState(() {
                       selectedDate = pickedDate;
@@ -387,7 +398,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                               const Spacer(),
                               GestureDetector(
                                 onTap: () {
-                                  datePicker();
+                                  datePicker(context);
                                 },
                                 child: Row(
                                   children: [
