@@ -18,46 +18,33 @@ class ExpenseWidget extends StatefulWidget {
 }
 
 class _ExpenseWidgetState extends State<ExpenseWidget> {
+  late DateFormat formatter;
+  late String currentDay;
+  late List<Widget> expenseContainerList;
+
+  @override
+  void initState() {
+    super.initState();
+    formatter = DateFormat.EEEE();
+    currentDay = formatter.format(widget.selectedDate);
+    expenseContainerList = [
+      ExpenseContainer(currentDay: currentDay, widget: widget),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
-    final DateFormat formatter = DateFormat.EEEE();
-    final String currentDay = formatter.format(widget.selectedDate);
-    List<Widget> expenseContainerList = [
-      ExpenseContainer(currentDay: currentDay, widget: widget)
-    ];
+
     expenseContainerList.add(
       ExpenseContainer(currentDay: currentDay, widget: widget),
     );
-    // switch (widget.selectedDate.weekday) {
-    //   case 1:
-    //     widget.currentDay = "Saturday";
-    //     break;
-    //   case 2:
-    //     widget.currentDay = "Monday";
-    //     break;
-    //   case 3:
-    //     widget.currentDay = "Tuesday";
-    //     break;
-    //   case 4:
-    //     widget.currentDay = "Wednesday";
-    //     break;
-    //   case 5:
-    //     widget.currentDay = "Thursday";
-    //     break;
-    //   case 6:
-    //     widget.currentDay = "Friday";
-    //     break;
-    //   case 7:
-    //     widget.currentDay = "Sunday";
-    //     break;
-    // }
-    // return ExpenseContainer(currentDay: currentDay, widget: widget);
-    // return expenseContainerList[0];
+
     return ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: expenseContainerList.length,
-        itemBuilder: ((context, index) => expenseContainerList[index]));
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: expenseContainerList.length,
+      itemBuilder: ((context, index) => expenseContainerList[index]),
+    );
   }
 }
 
