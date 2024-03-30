@@ -243,6 +243,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                         totalAmount: totalAmount,
                         selectedDate: tempSelectedDate!,
                       ),
+                      
                 const SizedBox(
                   height: 20,
                 ),
