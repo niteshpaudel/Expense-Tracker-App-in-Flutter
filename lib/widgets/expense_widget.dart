@@ -11,8 +11,6 @@ class ExpenseWidget extends StatefulWidget {
   final List<Widget> expenseList;
   final double totalAmount;
   final DateTime selectedDate;
-
-  // String? currentDay;
   @override
   State<ExpenseWidget> createState() => _ExpenseWidgetState();
 }
@@ -25,16 +23,18 @@ class _ExpenseWidgetState extends State<ExpenseWidget> {
   @override
   void initState() {
     super.initState();
+    expenseContainerList = [];
+    upadateDate();
+  }
+
+  void upadateDate() {
     formatter = DateFormat.EEEE();
     currentDay = formatter.format(widget.selectedDate);
-    expenseContainerList = [
-      ExpenseContainer(currentDay: currentDay, widget: widget),
-    ];
   }
 
   @override
   Widget build(BuildContext context) {
-
+    upadateDate();
     expenseContainerList.add(
       ExpenseContainer(currentDay: currentDay, widget: widget),
     );
