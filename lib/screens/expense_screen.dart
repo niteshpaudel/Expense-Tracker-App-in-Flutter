@@ -22,11 +22,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   // FocusNode descriptionFocusNode = FocusNode();
   // FocusNode amountFocusNode = FocusNode();
   List<Expense> expenseList = [];
-  List<Expense> tempExpenseList = [];
   String greetingText = "Morning";
   int currenthour = DateTime.now().hour;
   DateTime? selectedDate;
   DateTime? tempSelectedDate;
+  double totalAmount = 0;
   @override
   void dispose() {
     expenseTitleController.dispose();
@@ -70,7 +70,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     } else if (currenthour > 18) {
       greetingText = "Evening";
     }
-    double totalAmount = 0;
+    
     for (Expense expense in expenseList) {
       totalAmount += expense.expenseAmount as double;
     }
