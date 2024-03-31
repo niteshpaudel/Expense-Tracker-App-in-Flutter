@@ -22,6 +22,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   // FocusNode descriptionFocusNode = FocusNode();
   // FocusNode amountFocusNode = FocusNode();
   List<Expense> expenseList = [];
+  List<Expense> tempExpenseList = [];
   String greetingText = "Morning";
   int currenthour = DateTime.now().hour;
   DateTime? selectedDate;
@@ -51,6 +52,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
           expenseDescription: receivedDecription,
           expenseAmount: receivedAmount,
         ));
+        // expenseList = tempExpenseList;
         expenseTitleController.clear();
         expenseAmountController.clear();
         expenseDescriptionController.clear();
@@ -243,7 +245,6 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                         totalAmount: totalAmount,
                         selectedDate: tempSelectedDate!,
                       ),
-                      
                 const SizedBox(
                   height: 20,
                 ),
@@ -451,6 +452,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                 });
               },
             );
+            expenseList.clear();
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
