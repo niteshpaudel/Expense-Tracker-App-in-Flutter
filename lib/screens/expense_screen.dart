@@ -2,10 +2,6 @@ import 'package:expense_tracker/widgets/expense.dart';
 import 'package:expense_tracker/widgets/expense_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-// print('Total Amount: $totalAmount');
-// int totalAmount = expenseList.map((expense) => expense.amount).reduce((value, element) => value + element);
-
 class ExpenseScreen extends StatefulWidget {
   const ExpenseScreen({super.key});
 
